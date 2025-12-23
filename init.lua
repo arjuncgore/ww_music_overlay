@@ -50,7 +50,7 @@ M.setup           = function(config, cfg)
 
         -- ==== CONFIGURE THE LOOK OF THE OVERLAY HERE ====
         if artist ~= "" then
-            layout = artist .. ": " .. title
+            layout = artist .. "\n" .. title
         else
             layout = title
         end
