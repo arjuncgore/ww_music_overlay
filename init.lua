@@ -63,7 +63,7 @@ M.setup = function(config, cfg)
 
         -- ==== CONFIGURE THE LOOK OF THE OVERLAY HERE ====
         if artist ~= "" then
-            layout = str_max(artist, cfg.look.max_len) .. "\n" .. title
+            layout = str_max(artist, cfg.look.max_len) .. "\n" .. str_max(title, cfg.look.max_len)
         else
             layout = str_max(title, cfg.look.max_len)
         end
