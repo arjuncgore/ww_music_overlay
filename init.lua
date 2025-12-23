@@ -8,8 +8,8 @@
 --         size = 3,
 --     },
 --     previous   = "F10",
---     play_pause = "F10",
---     next       = "F10",
+--     play_pause = "F11",
+--     next       = "F12",
 -- }
 
 -- ==== VARS ====
