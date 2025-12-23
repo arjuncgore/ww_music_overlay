@@ -6,6 +6,7 @@
 --         Y = 1380,
 --         color = '#000000',
 --         size = 3,
+--         max_len = 30,
 --     },
 --     previous   = "F10",
 --     play_pause = "F11",
@@ -20,8 +21,20 @@ local artist      = ""
 local title       = ""
 local M           = {}
 
+-- ==== HELPERS ====
+local function str_max(str, max_len)
+    str = str or ""
+    if max_len == nil or max_len <= 3 then
+        return str
+    end
+    if #str <= max_len then
+        return str
+    end
+    return str:sub(1, max_len - 3) .. "..."
+end
+
 -- ==== PLUG ====
-M.setup           = function(config, cfg)
+M.setup = function(config, cfg)
     -- ==== FUNCTIONS ====
     local update_overlay = function()
         local handle_artist = io.popen("playerctl metadata --format {{artist}}")
@@ -50,9 +63,9 @@ M.setup           = function(config, cfg)
 
         -- ==== CONFIGURE THE LOOK OF THE OVERLAY HERE ====
         if artist ~= "" then
-            layout = artist .. "\n" .. title
+            layout = str_max(artist, cfg.max_len) .. "\n" .. title
         else
-            layout = title
+            layout = str_max(title, cfg.max_len)
         end
 
         text_handle = waywall.text(layout,
