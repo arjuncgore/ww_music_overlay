@@ -7,7 +7,7 @@ local cfg = {
     overlay = true,
     look = {
         X = 70,
-        Y = 1280,
+        Y = 920,
         color = '#000000',
         size = 3,
         max_len = 30,
@@ -29,7 +29,7 @@ return {
 ### Otherwise
 #### Clone plugin to waywall config folder
 ```bash
-git clone https://github.com/arjuncgore/ww_music_overlay ~/.config/waywall/ww_music_overlay
+git clone https://github.com/arjuncgore/ww_music_overlay ~/.config/waywall/music_overlay
 ```
 
 #### Setup config in init.lua
@@ -39,7 +39,7 @@ local cfg = {
     overlay = true,
     look = {
         X = 70,
-        Y = 1280,
+        Y = 920,
         color = '#000000',
         size = 3,
         max_len = 30,
@@ -49,6 +49,6 @@ local cfg = {
     next = "F12",
 }
 
-require("music_overlay").setup(config, cfg)
+require("music_overlay.init").setup(config, cfg)
 return config
 ```
