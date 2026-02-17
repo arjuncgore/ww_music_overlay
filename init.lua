@@ -8,6 +8,11 @@
 --         size = 3,
 --         max_len = 30,
 --     },
+--     pic_look   = {
+--         X = 10,
+--         Y = 1380,
+--         size = 10
+--         }
 --     previous   = "F10",
 --     play_pause = "F11",
 --     next       = "F12",
@@ -19,6 +24,8 @@ local text_handle = nil
 local layout      = ""
 local artist      = ""
 local title       = ""
+local handle_pic  = nil
+local pic_path    = ""
 local M           = {}
 
 -- ==== HELPERS ====
@@ -39,6 +46,7 @@ M.setup = function(config, cfg)
     local update_overlay = function()
         local handle_artist = io.popen("playerctl metadata --format {{artist}}")
         local handle_title  = io.popen("playerctl metadata --format {{title}}")
+        local handle_pic    = io.popen("playerctl metadata --format '{{ mpris:artUrl }}'")
 
         if handle_artist then
             artist = handle_artist:read("*l")
@@ -52,6 +60,12 @@ M.setup = function(config, cfg)
         else
             title = "not found"
         end
+        if handle_pic then
+            title = handle_pic:read("*l")
+            handle_pic:close()
+        else
+            pic_path = ""
+        end
     end
     local enable_overlay = function()
         update_overlay()
@@ -59,6 +73,10 @@ M.setup = function(config, cfg)
         if text_handle then
             text_handle:close()
             text_handle = nil
+        end
+        if handle_pic then
+            handle_pic:close()
+            handle_pic = nil
         end
 
         -- ==== CONFIGURE THE LOOK OF THE OVERLAY HERE ====
@@ -70,6 +88,10 @@ M.setup = function(config, cfg)
 
         text_handle = waywall.text(layout,
             { x = cfg.look.X, y = cfg.look.Y, color = cfg.look.color, size = cfg.look.size })
+        if pic_path ~= "" then
+            handle_pic = waywall.image(pic_path,
+                { x = cfg.pic_look.X, y = cfg.pic_look.Y, w = cfg.pic_look.size, h = cfg.pic_look.size })
+        end
     end
 
     waywall.listen("state", function()
