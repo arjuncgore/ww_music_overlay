@@ -61,7 +61,7 @@ M.setup = function(config, cfg)
             title = "not found"
         end
         if handle_pic then
-            title = handle_pic:read("*l")
+            pic_path = handle_pic:read("*l")
             handle_pic:close()
         else
             pic_path = ""
