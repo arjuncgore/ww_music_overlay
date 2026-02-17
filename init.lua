@@ -90,7 +90,7 @@ M.setup = function(config, cfg)
             { x = cfg.look.X, y = cfg.look.Y, color = cfg.look.color, size = cfg.look.size })
         if pic_path ~= "" then
             pic_handle = waywall.image(pic_path:gsub("^file://", ""), {
-                dst = { x = cfg.pic_look.X, y = cfg.pic_look.Y, w = cfg.pic_look.size, h = cfg.pic_look.size }
+                dst = { x = cfg.pic_look.X, y = cfg.pic_look.Y, w = (336 / 188) * cfg.pic_look.size, h = cfg.pic_look.size }
             })
         end
     end
