@@ -12,7 +12,7 @@
 --         X = 10,
 --         Y = 1380,
 --         size = 10
---         }
+--      },
 --     previous   = "F10",
 --     play_pause = "F11",
 --     next       = "F12",
@@ -24,7 +24,7 @@ local text_handle = nil
 local layout      = ""
 local artist      = ""
 local title       = ""
-local handle_pic  = nil
+local pic_handle  = nil
 local pic_path    = ""
 local M           = {}
 
@@ -74,9 +74,9 @@ M.setup = function(config, cfg)
             text_handle:close()
             text_handle = nil
         end
-        if handle_pic then
-            handle_pic:close()
-            handle_pic = nil
+        if pic_handle then
+            pic_handle:close()
+            pic_handle = nil
         end
 
         -- ==== CONFIGURE THE LOOK OF THE OVERLAY HERE ====
@@ -89,7 +89,7 @@ M.setup = function(config, cfg)
         text_handle = waywall.text(layout,
             { x = cfg.look.X, y = cfg.look.Y, color = cfg.look.color, size = cfg.look.size })
         if pic_path ~= "" then
-            handle_pic = waywall.image(pic_path,
+            pic_handle = waywall.image(pic_path:gsub("^file://", ""),
                 { x = cfg.pic_look.X, y = cfg.pic_look.Y, w = cfg.pic_look.size, h = cfg.pic_look.size })
         end
     end
