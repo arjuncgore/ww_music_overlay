@@ -1,5 +1,21 @@
 # Music Overlay
 Music controls on waywall and an optional overlay (requires playerctl)
+
+## Dependencies
+This plugin requires [playerctl](https://github.com/altdesktop/playerctl). Install it on your distro with the following command.
+### Fedora
+```bash
+sudo dnf install playerctl
+```
+### Arch
+```bash
+sudo pacman -S playerctl
+```
+### Debian
+```bash
+sudo apt install playerctl
+```
+
 ## Setup
 ### Using [plug.waywall](https://github.com/its-saanvi/plug.waywall)
 ```lua
