@@ -11,6 +11,7 @@
 --     previous   = "F10",
 --     play_pause = "F11",
 --     next       = "F12",
+--     args       = "-p spotify"
 -- }
 
 -- ==== VARS ====
@@ -35,6 +36,8 @@ end
 
 -- ==== PLUG ====
 M.setup = function(config, cfg)
+    if cfg.args == nil then cfg.args = "" end
+
     -- ==== FUNCTIONS ====
     local update_overlay = function()
         local handle_artist = io.popen("playerctl metadata --format {{artist}}")
@@ -81,7 +84,7 @@ M.setup = function(config, cfg)
 
 
     config.actions[cfg.previous] = function()
-        waywall.exec("playerctl previous")
+        waywall.exec("playerctl previous " .. cfg.args)
         waywall.sleep(100)
         if cfg.overlay then
             enable_overlay()
@@ -89,7 +92,7 @@ M.setup = function(config, cfg)
     end
 
     config.actions[cfg.play_pause] = function()
-        waywall.exec("playerctl play-pause")
+        waywall.exec("playerctl play-pause " .. cfg.args)
         waywall.sleep(100)
         if cfg.overlay then
             enable_overlay()
@@ -97,7 +100,7 @@ M.setup = function(config, cfg)
     end
 
     config.actions[cfg.next] = function()
-        waywall.exec("playerctl next")
+        waywall.exec("playerctl next " .. cfg.args)
         waywall.sleep(100)
         if cfg.overlay then
             enable_overlay()
