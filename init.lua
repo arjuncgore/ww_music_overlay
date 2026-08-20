@@ -40,8 +40,8 @@ M.setup = function(config, cfg)
 
     -- ==== FUNCTIONS ====
     local update_overlay = function()
-        local handle_artist = io.popen("playerctl metadata --format {{artist}}")
-        local handle_title  = io.popen("playerctl metadata --format {{title}}")
+        local handle_artist = io.popen("playerctl metadata --format {{artist}} " .. cfg.args)
+        local handle_title  = io.popen("playerctl metadata --format {{title}} " .. cfg.args)
 
         if handle_artist then
             artist = handle_artist:read("*l")
