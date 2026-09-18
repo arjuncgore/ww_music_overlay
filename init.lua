@@ -11,7 +11,8 @@
 --     previous   = "F10",
 --     play_pause = "F11",
 --     next       = "F12",
---     args       = "-p spotify"
+--     args       = "-p spotify",
+--     wall_only  = false,
 -- }
 
 -- ==== VARS ====
@@ -57,6 +58,7 @@ M.setup = function(config, cfg)
         end
     end
     local enable_overlay = function()
+        local state = waywall.state()
         update_overlay()
 
         if text_handle then
@@ -70,6 +72,8 @@ M.setup = function(config, cfg)
         else
             layout = str_max(title, cfg.look.max_len)
         end
+
+        if state.screen ~= "wall" and cfg.wall_only then return end
 
         text_handle = waywall.text(layout,
             { x = cfg.look.X, y = cfg.look.Y, color = cfg.look.color, size = cfg.look.size })
